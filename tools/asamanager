@@ -725,6 +725,14 @@ function runSteamCMD(){
   HOME="${steamcmdhome}" "$steamcmdroot/$steamcmdexec" +@NoPromptForPassword 1 ${steamcmd_cmds_prelogin} "${steamcmd_force_install_dir[@]}" +login "${steamlogin:-anonymous}" ${steamcmd_cmds_postlogin} "$@" +quit
 }
 
+function doLogin(){
+ if [[ -z "${steamcmdhome}" || ! -d "${steamcmdhome}" ]]; then
+    steamcmdhome="${HOME}"
+  fi
+  # shellcheck disable=SC2086
+  HOME="${steamcmdhome}" "$steamcmdroot/$steamcmdexec" +login $1 $2 +quit
+}
+
 function runSteamCMDspinner(){
   if [ -n "$verbose" ]; then
     printf "Executing"
@@ -3939,6 +3947,7 @@ main(){
 
     # get the number of arguments for commands that take arguments
     case "$command" in
+      login) nrarg=2; ;;
       installmod) nrarg=1; ;;
       uninstallmod) nrarg=1; ;;
       reinstallmod) nrarg=1; ;;
@@ -4001,6 +4010,12 @@ main(){
     case "$command" in
       upgrade-tools)
         doUpgradeTools
+        exit
+      ;;
+      login)
+        steamlogin=${args[0]}
+        steampassword=${args[1]}
+        doLogin $steamlogin $steampassword
         exit
       ;;
       uninstall-tools)
