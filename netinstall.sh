@@ -78,9 +78,9 @@ function doInstallFromCommit(){
   rm -rf "$tmpdir"
 
   if [ "$result" = 0 ] || [ "$result" = 2 ]; then
-    echo "ARK Server Tools successfully installed"
+    echo "ASA Server Tools successfully installed"
   else
-    echo "ARK Server Tools install failed"
+    echo "ASA Server Tools install failed"
   fi
   return $result
 }

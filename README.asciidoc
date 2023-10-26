@@ -1,6 +1,6 @@
-= ARK: Survival Evolved Linux Server Tools
+= ARK: Survival Ascended Linux Server Tools
 
-This tool allows you to manage any ARK: Survival Evolved linux server without having to remember long commands.
+This tool allows you to manage any ARK: Survival Ascended linux server without having to remember long commands.
 It provides a lot of features, to get the full list check the <<Usage>> section.
 
 Known issue with updating
@@ -30,7 +30,7 @@ Installation
 Prerequisites
 ~~~~~~~~~~~~~
 
-ARK Server Tools requires certain packages be installed in order to function correctly.
+ASA Server Tools requires certain packages be installed in order to function correctly.
 
 If running under CentOS or RHEL, you will need the following packages installed:
 ```
@@ -67,16 +67,16 @@ tar
 If using CentOS 6 or earlier, or Debian 7 or earlier, you will need to compile a newer version of glibc.
 See https://github.com/Norwegian-Vikings/asa-server-tools/wiki/Install-of-required-versions-of-glibc-and-gcc-on-RHEL-CentOS
 
-To use ARK Server Tools, you will need to install **SteamCMD** following this guide:
+To use ASA Server Tools, you will need to install **SteamCMD** following this guide:
 
 https://developer.valvesoftware.com/wiki/SteamCMD#Linux
 
-We assume you have created the `steam` user to store steamcmd and your ARK server.
+We assume you have created the `steam` user to store steamcmd and your ASA server.
 
 Requirements
 ~~~~~~~~~~~~
 
-To allow your ARK server to communicate with the outside you have to open some ports in your firewall:
+To allow your ASA server to communicate with the outside you have to open some ports in your firewall:
 
 ```sh
 iptables -I INPUT -p udp --dport 27016 -j ACCEPT
@@ -90,10 +90,10 @@ iptables -I INPUT -p tcp --dport 32330 -j ACCEPT
 
 NB: Change the ports according to the ones set in your `asamanager.cfg` file.
 
-Install ARK Server Tools
+Install ASA Server Tools
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-To install ARK Server Tools run this command:
+To install ASA Server Tools run this command:
 
 [source,sh]
 curl -sL https://raw.githubusercontent.com/Norwegian-Vikings/asa-server-tools/master/netinstall.sh | sudo bash -s steam
@@ -102,9 +102,9 @@ NB: You may want to change the `bash -s` parameter to fit your steam user if dif
 
 If you want to install the `asamanager` service, append the `--install-service` option to the install command.
 
-This will copy the `asamanager` script and its daemon to the proper directories and will create an empty log directory in `/var/log` for ARK Server Tools.
+This will copy the `asamanager` script and its daemon to the proper directories and will create an empty log directory in `/var/log` for ASA Server Tools.
 
-To instead perform a user-install of ARK Server Tools as an unprivileged user, run this command:
+To instead perform a user-install of ASA Server Tools as an unprivileged user, run this command:
 
 [source,sh]
 curl -sL https://raw.githubusercontent.com/Norwegian-Vikings/asa-server-tools/master/netinstall.sh | bash -s -- --me
@@ -119,16 +119,16 @@ paths that are non-standard in your environment (e.g. one common one is the path
 
 See <<Configuration files>> for options.
 
-Also, in these files, you can specify any parameter you want to add to the startup command of ARK server.
+Also, in these files, you can specify any parameter you want to add to the startup command of ASA server.
 These parameters must be prefixed by the `ark_` string, some example could be:
 
 [source,sh]
-ark_SessionName="My ARK server"
+ark_SessionName="My ASA server"
 ark_MaxPlayers=50
 ark_ServerPVE=False
 ark_DifficultyOffset=1
 
-Your session name may not contain special characters (eg. `!![EU]!! Aw&some ARK`) as it could break the startup command.
+Your session name may not contain special characters (eg. `!![EU]!! Aw&some ASA`) as it could break the startup command.
 In this case you may want to comment out the `ark_SessionName` variable and define it inside your **GameUserSettings.ini** file instead.
 
 To specify an option without an argument (e.g. `bRawSockets`), specify an empty argument (e.g. `ark_bRawSockets=""`).
@@ -147,10 +147,10 @@ If the RCONPort setting is shared between multiple instances, the server will ha
 
 See <<Configuration files>> for more options.
 
-Install ARK Server
+Install ASA Server
 ~~~~~~~~~~~~~~~~~~
 
-To install ARK Server just run this command as normal user:
+To install ASA Server just run this command as normal user:
 
 [source,sh]
 asamanager install
@@ -202,10 +202,10 @@ Instanceless commands
 
 [horizontal]
 `upgrade-tools`::
-    Upgrades the ARK server tools to the latest version
+    Upgrades the ASA server tools to the latest version
 
 `uninstall-tools`::
-    Uninstalls the ARK server tools
+    Uninstalls the ASA server tools
 
 `list-instances`::
     Lists the available instances
@@ -264,10 +264,10 @@ instances.
 
 `install`::
     Downloads and installs (or validates an existing install) of
-    the ARK server
+    the ASA server
 
 `update`::
-    Updates an install of the ARK server (or installs it if it's
+    Updates an install of the ASA server (or installs it if it's
     not already installed)
 
     `--force`;;
@@ -285,7 +285,7 @@ instances.
         Only updates the server when nobody is connected
 
     `--validate`;;
-        Re-validates the ARK server install
+        Re-validates the ASA server install
 
     `--saveworld`;;
         Saves the world using `saveworld` - usually not
@@ -319,7 +319,7 @@ instances.
     the `--warn` option
 
 `checkupdate`::
-    Checks if an ARK server update is available
+    Checks if an ASA server update is available
 
     Exit status;;
         - 0: No update is available
@@ -412,7 +412,7 @@ Mod types:
     webhook
 
 `status`::
-    Prints the status of the ARK server
+    Prints the status of the ASA server
 
 `printconfig`::
     Prints the config option names and which file they were found in
@@ -494,7 +494,7 @@ files:
 [horizontal]
 `arkstChannel`::
     Specifies the release channel (git branch) to use when
-    upgrading the ARK server tools
+    upgrading the ASA server tools
 
 `install_bindir`::
 `install_libexecdir`::
@@ -557,10 +557,10 @@ Some SteamCMD installations (especially with the `steamcmd` package installed)
 use `SteamApps` as the steamapps directory instead of `steamapps`
 
 `arkserverexec`::
-    The relative path within an ARK server install where the
-    ARK server executable can be found.
+    The relative path within an ASA server install where the
+    ASA server executable can be found.
 +
-For the standard ARK server, this should be `ShooterGame/Binaries/Linux/ShooterGameServer`
+For the standard ASA server, this should be `ShooterGame/Binaries/Linux/ShooterGameServer`
 
 `arkbackupdir`::
     The directory in which to store backups.  Can be overridden in
@@ -582,7 +582,7 @@ e.g. `arkBackupPostCommand='aws s3 cp "$backupfile" "s3://bucket_name/backups"'`
     should be run
 
 `arkautorestartfile`::
-    The relative path within an ARK server install to place the
+    The relative path within an ASA server install to place the
     autorestart lock file
 
 `arkAlwaysRestartOnCrash`::
@@ -621,12 +621,12 @@ default: `/path/to/instance/config.Game.ini` where `/path/to/instance/config` is
     Limits the size of the stored backups
 
 `arkPriorityBoost`::
-    Attempts to boost the priority of the ARK server.
+    Attempts to boost the priority of the ASA server.
     Negative values give a higher priority, and positive values give a lower priority.
     Requires `sudo` and `renice`
 
 `arkCpuAffinity`::
-    Attempts to set the CPU affinity of the ARK server.
+    Attempts to set the CPU affinity of the ASA server.
     Setting is a comma-delimited list of processor indices on which the server should run.
     Requires `sudo` and `taskset`
 
@@ -719,17 +719,17 @@ e.g. `notifyCommand='echo "$msg" | mailx -s "Message from instance ${instance} o
     Specifies where to store log files
 
 `appid`::
-    The Steam AppID of the ARK server
+    The Steam AppID of the ASA server
 
 `mod_appid`::
-    The Steam AppID of the ARK client (used for downloading mods)
+    The Steam AppID of the ASA client (used for downloading mods)
 
 `mod_branch`::
     The Mod branch (`Windows` or `Linux`) to use.  Virtually all mods
-    use the `Windows` branch for the ARK server, and the `Linux`
+    use the `Windows` branch for the ASA server, and the `Linux`
     branch almost always crashes the server
 
-ARK server options:
+ASA server options:
 
 [horizontal]
 `serverMap`::
@@ -772,7 +772,7 @@ the global config.
 
 [horizontal]
 `arkserverroot`::
-    The directory under which the ARK server is installed
+    The directory under which the ASA server is installed
 
 `serverMap`::
     The map the server should use
@@ -826,7 +826,7 @@ the global config.
     `disabled`;;
         A disabled mod
 
-Common ARK options
+Common ASA options
 ~~~~~~~~~~~~~~~~~~
 
 [horizontal]

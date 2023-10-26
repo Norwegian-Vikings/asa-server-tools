@@ -123,7 +123,7 @@ DATADIR="${DATADIR:-${DATAPREFIX}/asamanager}"
 
 if [ "$showusage" == "yes" ]; then
     echo "Usage: ./install.sh {<user>|--me} [OPTIONS]"
-    echo "You must specify your system steam user who own steamcmd directory to install ARK Tools."
+    echo "You must specify your system steam user who own steamcmd directory to install ASA Tools."
     echo "Specify the special used '--me' to perform a user-install."
     echo
     echo "<user>          The user asamanager should be run as"
@@ -200,7 +200,7 @@ if [ "$userinstall" == "yes" ]; then
       bash ./migrate-config.sh "${INSTALL_ROOT}${CONFIGFILE}${SUFFIX}"
       bash ./migrate-main-instance.sh "${INSTALL_ROOT}${CONFIGFILE}${SUFFIX}" "${INSTALL_ROOT}${INSTANCEDIR}/main.cfg${SUFFIX}"
 
-      echo "A previous version of ARK Server Tools was detected in your system, your old configuration was not overwritten. You may need to manually update it."
+      echo "A previous version of ASA Server Tools was detected in your system, your old configuration was not overwritten. You may need to manually update it."
       echo "A copy of the new configuration file was included in '${CONFIGFILE}.NEW'. Make sure to review any changes and update your config accordingly!"
       exit 2
     else
@@ -346,7 +346,7 @@ else
       bash ./migrate-config.sh "${INSTALL_ROOT}${CONFIGFILE}${SUFFIX}"
       bash ./migrate-main-instance.sh "${INSTALL_ROOT}${CONFIGFILE}${SUFFIX}" "${INSTALL_ROOT}${INSTANCEDIR}/main.cfg${SUFFIX}"
 
-      echo "A previous version of ARK Server Tools was detected in your system, your old configuration was not overwritten. You may need to manually update it."
+      echo "A previous version of ASA Server Tools was detected in your system, your old configuration was not overwritten. You may need to manually update it."
       echo "A copy of the new configuration file was included in /etc/asamanager. Make sure to review any changes and update your config accordingly!"
       exit 2
     else

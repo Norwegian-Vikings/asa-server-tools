@@ -2,7 +2,7 @@
 #
 # /etc/rc.d/init.d/asamanager
 #
-# ARK manager daemon
+# ASA manager daemon
 #
 # chkconfig: 2345 80 20
 # description: ASA manager daemon used to start the server and keep it updated
@@ -10,13 +10,13 @@
 # config: /etc/asamanager/asamanager.cfg
 
 ### BEGIN INIT INFO
-# Provides:          ARK manager deamon
+# Provides:          ASA manager deamon
 # Required-Start:    networking
 # Required-Stop:     networking
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
-# Short-Description: ARK manager deamon
-# Description:       ARK manager daemon used to start the server and keep it updated
+# Short-Description: ASA manager deamon
+# Description:       ASA manager daemon used to start the server and keep it updated
 #
 ### END INIT INFO
 

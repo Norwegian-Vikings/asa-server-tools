@@ -73,7 +73,7 @@ steamcmd_cmds_postlogin=
 # SteamCMD extra options to app_update command
 steamcmd_appextraopts=
 
-## ARK server global config
+## ASA server global config
 
 # Working directory
 serverbasedir=
@@ -81,10 +81,10 @@ serverbasedir=
 # Path of server executable relative to ${arkserverroot}
 arkserverexec="ShooterGame/Binaries/Linux/ShooterGameServer"
 
-# Path in which to store ARK server backups
-arkbackupdir="/home/steam/ARK-Backups"
+# Path in which to store ASA server backups
+arkbackupdir="/home/steam/ASA-Backups"
 
-# Compress ARK server backups - true to enable, false to disable
+# Compress ASA server backups - true to enable, false to disable
 arkbackupcompress="true"
 
 # Disable old Port - 1 behaviour - true to disable behaviour, false to use old behaviour
@@ -93,10 +93,10 @@ arkNoPortDecrement="true"
 # Auto-restart file path relative to ${arkserverroot} - used to signal if server should be automatically restarted if it exits
 arkautorestartfile="ShooterGame/Saved/.autorestart"
 
-# Update ARK server before startup - true to enable, false to disable
+# Update ASA server before startup - true to enable, false to disable
 arkAutoUpdateOnStart="false"
 
-# Backup ARK server config and save before updating - true to enable, false to disable
+# Backup ASA server config and save before updating - true to enable, false to disable
 arkBackupPreUpdate="false"
 
 # Command to run after creating backup - e.g. to upload backup to an external service
@@ -112,7 +112,7 @@ defaultinstance_max=20
 
 # SteamCMD staging directory - used to enable updates to be fully downloaded before restarting the server (reduces downtime while updating).
 # Also used for reducing disk space used by multiple instances
-arkStagingDir="/home/steam/ARK-Staging"
+arkStagingDir="/home/steam/ASA-Staging"
 
 # Use reflinks instead of hard links when updating from staging directory
 # Only on filesystems that support reflinks - e.g. btrfs
@@ -145,22 +145,22 @@ arkprecisewarn="false"
 ## Modify as desired, putting the %d replacement operator where the number belongs
 
 # Message template when updating with 1 or more minutes remaining
-msgWarnUpdateMinutes="This ARK server will shutdown for an update in %d minutes"
+msgWarnUpdateMinutes="This ASA server will shutdown for an update in %d minutes"
 
 # Message template when updating with less than 1 minute remaining
-msgWarnUpdateSeconds="This ARK server will shutdown for an update in %d seconds"
+msgWarnUpdateSeconds="This ASA server will shutdown for an update in %d seconds"
 
 # Message template when restarting with 1 or more minutes remaining
-msgWarnRestartMinutes="This ARK server will shutdown for a restart in %d minutes"
+msgWarnRestartMinutes="This ASA server will shutdown for a restart in %d minutes"
 
 # Message template when restarting with less than 1 minute remaining
-msgWarnRestartSeconds="This ARK server will shutdown for a restart in %d seconds"
+msgWarnRestartSeconds="This ASA server will shutdown for a restart in %d seconds"
 
 # Message template when shutting down with 1 or more minutes remaining
-msgWarnShutdownMinutes="This ARK server will shutdown in %d minutes"
+msgWarnShutdownMinutes="This ASA server will shutdown in %d minutes"
 
 # Message template when shutting down with less than 1 minute remaining
-msgWarnShutdownSeconds="This ARK server will shutdown in %d seconds"
+msgWarnShutdownSeconds="This ASA server will shutdown in %d seconds"
 
 # Message when update / restart / shutdown cancelled by player request
 msgWarnCancelled="Restart cancelled by player request"
@@ -195,7 +195,7 @@ notifyMsgServerTerminated="Server exited - restarting"
 # Warning message template - alternative to msgWarn* above
 # {time} is replaced with msgTimeMinutes or msgTimeSeconds
 # {reason} is replaced with the reason appropriate for the update / shutdown / restart
-msgWarnReason="This ARK server will shut down in {time} {reason}"
+msgWarnReason="This ASA server will shut down in {time} {reason}"
 
 # {time} template used when time remaining is 1 or more minutes
 msgTimeMinutes="{minutes} minutes"
@@ -244,7 +244,7 @@ serverMap="TheIsland"
 # Server map mod Id (<fileid> in http://steamcommunity.com/sharedfiles/filedetails/?id=<fileid>) - alternative to above ${serverMap}
 serverMapModId="469987622"
 
-## ARK server common options - use ark_<optionname>=<value>
+## ASA server common options - use ark_<optionname>=<value>
 ## comment out these values if you want to define them
 ## inside your GameUserSettings.ini file
 ## This is not an exhaustive list of options
@@ -255,10 +255,10 @@ ark_TotalConversionMod="496735411"
 # Enable RCON
 ark_RCONEnabled="True"
 
-# ARK server password, empty: no password required to login
+# ASA server password, empty: no password required to login
 ark_ServerPassword=""
 
-# ARK server admin password
+# ASA server admin password
 ark_ServerAdminPassword="keyboardcat"
 
 # Maximum player connection count
@@ -270,7 +270,7 @@ ark_GameModIds="487516323,487516324,487516325"
 # Alternative Save Directory name
 ark_AltSaveDirectoryName="SotF"
 
-## ARK server flags - use arkflag_<optionname>=true
+## ASA server flags - use arkflag_<optionname>=true
 ## These are only examples - this is not an exhaustive list of options
 
 # Only allow admins to rejoin as spectator
@@ -279,25 +279,25 @@ arkflag_OnlyAdminRejoinAsSpectator=true
 # Disallow players from becoming spectators when they die
 arkflag_DisableDeathSpectator=true
 
-# ARK server manages mods itself
+# ASA server manages mods itself
 arkflag_automanagedmods=
 
-## ARK server options - i.e. for -optname=val, use arkopt_optname=val
+## ASA server options - i.e. for -optname=val, use arkopt_optname=val
 ## These are only examples - this is not an exhaustive list of options
 
-# Structure Destruction Tag - This was a one-time option when upgrading from before ARK v216
+# Structure Destruction Tag - This was a one-time option when upgrading from before ASA v216
 arkopt_StructureDestructionTag=DestroySwampSnowStructures
 
 # Logs path (default /var/log/arktools)
 logdir="/var/log/arktools"
 
-# ARK server Steam App ID
+# ASA server Steam App ID
 appid=376030
 
 # Steam App ID for downloading mods
 mod_appid=346110
 
-# Mod OS Selection - should be Windows - Linux mods are known to be incompatible with the ARK server
+# Mod OS Selection - should be Windows - Linux mods are known to be incompatible with the ASA server
 mod_branch=Windows
 
 # Mod-specific OS selection
@@ -318,8 +318,8 @@ arkSingleInstance=
 
 ### instance.cfg
 
-# Absolute path of ARK server instance
-arkserverroot="/home/steam/ARK"
+# Absolute path of ASA server instance
+arkserverroot="/home/steam/ASA"
 
 # Server map
 serverMap="TheIsland"
@@ -346,15 +346,15 @@ arkGameUserSettingsIniFile=
 # Overwrite Game.ini from this file
 arkGameIniFile=
 
-# Attempt to renice (boost priority) of ARK server process
+# Attempt to renice (boost priority) of ASA server process
 arkPriorityBoost=
 
-# Set ARK server CPU affinity
+# Set ASA server CPU affinity
 arkCpuAffinity=
 
 
 
-## ARK server instance options - use ark_<optionname>=<value>
+## ASA server instance options - use ark_<optionname>=<value>
 ## comment out these values if you want to define them
 ## inside your GameUserSettings.ini file
 ## This is not an exhaustive list of options
@@ -370,7 +370,7 @@ ark_RCONPort="32330"
 
 # Server Name - this is the name that appears in the server browser.
 # If this name should contain characters outside the 7-bit ASCII character set, this should be commented out and the server name should be specified in a UTF-16 encoded GameUserSettings.ini instead
-ark_SessionName="ARK Server Tools"
+ark_SessionName="ASA Server Tools"
 
 # Game Port - this port and the port above / below it must be unique for each game server running on the host
 ark_Port="7778"
@@ -378,10 +378,10 @@ ark_Port="7778"
 # Query Port - this port must be unique for each game server running on the host
 ark_QueryPort="27015"
 
-# ARK server password, empty: no password required to login
+# ASA server password, empty: no password required to login
 ark_ServerPassword=""
 
-# ARK server admin password
+# ASA server admin password
 ark_ServerAdminPassword="keyboardcat"
 
 # Maximum player connection count
@@ -393,7 +393,7 @@ ark_GameModIds="487516323,487516324,487516325"
 # Alternative Save Directory name
 ark_AltSaveDirectoryName="SotF"
 
-## ARK server flags - use arkflag_<optionname>=true
+## ASA server flags - use arkflag_<optionname>=true
 ## These are only examples - this is not an exhaustive list of options
 
 # Only allow admins to rejoin as spectator
@@ -408,10 +408,10 @@ arkflag_crossplay=
 # Enable Epic connections only - mods cannot be used
 arkflag_epiconly=
 
-## ARK server options - i.e. for -optname=val, use arkopt_optname=val
+## ASA server options - i.e. for -optname=val, use arkopt_optname=val
 ## These are only examples - this is not an exhaustive list of options
 
-# Structure Destruction Tag - This was a one-time option when upgrading from before ARK v216
+# Structure Destruction Tag - This was a one-time option when upgrading from before ASA v216
 arkopt_StructureDestructionTag=DestroySwampSnowStructures
 
 
