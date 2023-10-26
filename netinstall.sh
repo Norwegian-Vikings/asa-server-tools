@@ -4,7 +4,7 @@
 # Net Installer, used with curl
 #
 
-arkstGithubRepo="StevenB83/ark-server-tools"
+arkstGithubRepo="Norwegian-Vikings/asa-server-tools"
 
 steamcmd_user="$1"
 shift
@@ -61,12 +61,12 @@ function die(){
 function doInstallFromCommit(){
   local commit="$1"
   shift
-  tmpdir="$(mktemp -t -d "ark-server-tools-XXXXXXXX")"
+  tmpdir="$(mktemp -t -d "asa-server-tools-XXXXXXXX")"
   if [ -z "$tmpdir" ]; then echo "Unable to create temporary directory"; exit 1; fi
   cd "$tmpdir" || die "Unable to change to temporary directory"
   echo "Downloading installer"
   curl -s -L "https://github.com/${arkstGithubRepo}/archive/${commit}.tar.gz" | tar -xz
-  cd "ark-server-tools-${commit}/tools" || die "Unable to change to extracted directory"
+  cd "asa-server-tools-${commit}/tools" || die "Unable to change to extracted directory"
   if [ ! -f "install.sh" ]; then echo "install.sh not found in $PWD"; exit 1; fi
   sed -i -e "s|^arkstCommit='.*'|arkstCommit='${commit}'|" \
          -e "s|^arkstTag='.*'|arkstTag='${tagname}'|" \
