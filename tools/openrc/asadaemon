@@ -1,12 +1,12 @@
 #!/sbin/runscript
-# Short-Description: ARK manager deamon
-# Description:       ARK manager daemon used to start the server and keep it updated
+# Short-Description: ASA manager deamon
+# Description:       ASA manager daemon used to start the server and keep it updated
 
-source /etc/arkmanager/arkmanager.cfg
+source /etc/asamanager/asamanager.cfg
 
 NAME="ShooterGameServer"
 LOGFILE="${logdir}/${NAME}.log"
-DAEMON="/usr/bin/arkmanager"
+DAEMON="/usr/bin/asamanager"
 
 depend(){
     need net
@@ -14,7 +14,7 @@ depend(){
 
 start(){
     INSTANCE="${RC_SVCNAME#*.}"
-    ebegin "Starting ARK manager daemon"
+    ebegin "Starting ASA manager daemon"
     ulimit -n 100000
     if [ "$INSTANCE" != "$RC_SVCNAME" ]; then
         "$DAEMON" start "@${INSTANCE}"
@@ -26,7 +26,7 @@ start(){
 
 stop(){
     INSTANCE="${RC_SVCNAME#*.}"
-    ebegin "Stopping ARK manager daemon"
+    ebegin "Stopping ASA manager daemon"
     if [ "$INSTANCE" != "$RC_SVCNAME" ]; then
         "$DAEMON" stop "@${INSTANCE}"
     else

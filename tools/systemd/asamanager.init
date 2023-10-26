@@ -1,14 +1,14 @@
 #!/bin/bash
 
-DAEMON="/usr/bin/arkmanager"
+DAEMON="/usr/bin/asamanager"
 
 for service in $(${DAEMON} list-instances --brief); do
   case "$1" in
     start)
-      systemctl start arkmanager@${service}
+      systemctl start asamanager@${service}
     ;;
     stop)
-      systemctl stop arkmanager@${service}
+      systemctl stop asamanager@${service}
     ;;
   esac
 done

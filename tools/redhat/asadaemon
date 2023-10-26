@@ -1,4 +1,14 @@
 #!/bin/bash
+#
+# /etc/rc.d/init.d/asamanager
+#
+# ARK manager daemon
+#
+# chkconfig: 2345 80 20
+# description: ASA manager daemon used to start the server and keep it updated
+# processname: ShooterGameServer
+# config: /etc/asamanager/asamanager.cfg
+
 ### BEGIN INIT INFO
 # Provides:          ARK manager deamon
 # Required-Start:    networking
@@ -12,15 +22,19 @@
 
 # Using the lsb functions to perform the operations.
 # shellcheck source=/dev/null
-. /lib/lsb/init-functions
+. /etc/rc.d/init.d/functions
 
 # Global variables
-# shellcheck source=../arkmanager.cfg
-source /etc/arkmanager/arkmanager.cfg
+# shellcheck source=../asamanager.cfg
+source /etc/asamanager/asamanager.cfg
 
 NAME="ShooterGameServer"
 #LOGFILE="${logdir}/${NAME}.log"
-DAEMON="/usr/bin/arkmanager"
+DAEMON="/usr/bin/asamanager"
+
+GREEN="\\033[1;32m"
+RED="\\033[1;31m"
+NORMAL="\\033[0;39m"
 
 SVCNAME="${0##*/}"
 INSTANCE="${SVCNAME#*.}"
@@ -36,25 +50,26 @@ test -x $DAEMON || exit 5
 
 function start_instance(){
   local INSTANCE="$1"
-  PID="$(<"/var/run/arkmanager.${INSTANCE}.pid")"
+  PID="$(<"/var/run/asamanager.${INSTANCE}.pid")"
   if [ -n "$PID" ] && kill -0 "$PID" >/dev/null 2>&1; then
     if grep " ${PID} .* ${DAEMON}" <(ps -ef) >/dev/null 2>&1; then
       echo "$NAME @${INSTANCE} is already running"
       return 0
     fi
   fi
-  log_daemon_msg "Starting" "$NAME @${INSTANCE}"
+  echo -n "Starting $NAME @${INSTANCE}: "
   ulimit -n 100000
   "${DAEMON}" run "@${INSTANCE}" &
   PID="$!"
 
   sleep 5
   if kill -0 "$PID" >/dev/null 2>&1; then
-    echo "$PID" >"/var/run/arkmanager.${INSTANCE}.pid"
-    log_end_msg 0
+    echo "$PID" >"/var/run/asamanager.${INSTANCE}.pid"
+    touch "/var/lock/subsys/asamanager.${INSTANCE}"
+    echo "[" "$GREEN" " OK " "$NORMAL" "]"
     return 0
   else
-    log_end_msg 1
+    echo "[" "$RED" " FAILED " "$NORMAL" "]"
     return 1
   fi
 }
@@ -75,10 +90,11 @@ function start_all_instances(){
 
 function stop_instance(){
   local INSTANCE="$1"
-  log_daemon_msg "Stopping $NAME @${INSTANCE}: "
+  echo -n "Stopping $NAME @${INSTANCE}: "
   "${DAEMON}" stop "@${INSTANCE}" &
-  rm -f "/var/run/arkmanager.${INSTANCE}.pid"
-  log_end_msg 0
+  rm -f "/var/lock/subsys/asamanager.${INSTANCE}"
+  rm -f "/var/run/asamanager.${INSTANCE}.pid"
+  echo "[" "$GREEN" " OK " "$NORMAL" "]"
   return 0
 }
 
@@ -89,6 +105,7 @@ case "$1" in
       exit $?
     else
       if start_all_instances; then
+        touch /var/lock/subsys/asamanager
         exit 0
       else
         exit 1
@@ -104,6 +121,7 @@ case "$1" in
       for instance in $("${DAEMON}" list-instances --brief); do
         stop_instance "$instance"
       done
+      rm -f "/var/lock/subsys/asamanager"
       exit $?
     fi
   ;;
@@ -115,13 +133,12 @@ case "$1" in
 
   status)
     "$DAEMON" status "@${INSTANCE:-all}"
+    exit 0
   ;;
 
   *)
     # For invalid arguments, print the usage message.
     echo "Usage: $0 {start|stop|restart|status}"
-    exit 2
+    exit 1
   ;;
 esac
-
-exit 0

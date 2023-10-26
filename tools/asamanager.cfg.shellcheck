@@ -1,4 +1,4 @@
-### arkmanager variables
+### asamanager variables
 
 # Script version
 arkstVersion='1.6'
@@ -12,7 +12,7 @@ arkstCommit=
 # Set this if you are a distribution package maintainer otherwise leave empty
 arkstUsePkgManager=
 
-# Set this to allow variable expansion in variables sourced from arkmanager.cfg
+# Set this to allow variable expansion in variables sourced from asamanager.cfg
 arkstRootUseEnv=
 
 # Set this to override the main fork
@@ -24,7 +24,7 @@ arkstGlobalCfgFileOverride=
 # Set this to override the user config file path
 arkstUserCfgFileOverride=
 
-### arkmanager.cfg
+### asamanager.cfg
 
 # Git branch in above ${arkstGithubRepoOverride} repository
 arkstChannel="master"
@@ -33,10 +33,10 @@ arkstChannel="master"
 install_bindir="/usr/bin"
 
 # Set by installer to directory containing installed miscellaneous executables.
-install_libexecdir="/usr/libexec/arkmanager"
+install_libexecdir="/usr/libexec/asamanager"
 
 # Set by installer to directory containing installed miscellaneous data.
-install_datadir="/usr/share/arkmanager"
+install_datadir="/usr/share/asamanager"
 
 ## SteamCMD Configuration
 
@@ -332,7 +332,7 @@ serverMapModId="469987622"
 arkCustomDynamicConfigURL="http://arkdedicated.com/dynamicconfig.ini"
 
 # Script to run before instance starts
-arkPreStart="/etc/arkmanager/instances/instance.start"
+arkPreStart="/etc/asamanager/instances/instance.start"
 
 # Use Steam player list query instead of player count from server query for player count
 arkUsePlayerList=

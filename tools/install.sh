@@ -107,31 +107,31 @@ if [ "$userinstall" == "yes" ]; then
   PREFIX="${PREFIX:-${HOME}}"
   EXECPREFIX="${EXECPREFIX:-${PREFIX}}"
   DATAPREFIX="${DATAPREFIX:-${PREFIX}/.local/share}"
-  CONFIGFILE="${PREFIX}/.arkmanager.cfg"
-  INSTANCEDIR="${PREFIX}/.config/arkmanager/instances"
+  CONFIGFILE="${PREFIX}/.asamanager.cfg"
+  INSTANCEDIR="${PREFIX}/.config/asamanager/instances"
 else
   PREFIX="${PREFIX:-/usr/local}"
   EXECPREFIX="${EXECPREFIX:-${PREFIX}}"
   DATAPREFIX="${DATAPREFIX:-${PREFIX}/share}"
-  CONFIGFILE="/etc/arkmanager/arkmanager.cfg"
-  INSTANCEDIR="/etc/arkmanager/instances"
+  CONFIGFILE="/etc/asamanager/asamanager.cfg"
+  INSTANCEDIR="/etc/asamanager/instances"
 fi
 
 BINDIR="${BINDIR:-${EXECPREFIX}/bin}"
-LIBEXECDIR="${LIBEXECDIR:-${EXECPREFIX}/libexec/arkmanager}"
-DATADIR="${DATADIR:-${DATAPREFIX}/arkmanager}"
+LIBEXECDIR="${LIBEXECDIR:-${EXECPREFIX}/libexec/asamanager}"
+DATADIR="${DATADIR:-${DATAPREFIX}/asamanager}"
 
 if [ "$showusage" == "yes" ]; then
     echo "Usage: ./install.sh {<user>|--me} [OPTIONS]"
     echo "You must specify your system steam user who own steamcmd directory to install ARK Tools."
     echo "Specify the special used '--me' to perform a user-install."
     echo
-    echo "<user>          The user arkmanager should be run as"
+    echo "<user>          The user asamanager should be run as"
     echo
     echo "Option          Description"
     echo "--help, -h      Show this help text"
     echo "--me            Perform a user-install"
-    echo "--prefix        Specify the prefix under which to install arkmanager"
+    echo "--prefix        Specify the prefix under which to install asamanager"
     echo "                [PREFIX=${PREFIX}]"
     echo "--exec-prefix   Specify the prefix under which to install executables"
     echo "                [EXECPREFIX=${EXECPREFIX}]"
@@ -151,20 +151,20 @@ if [ "$showusage" == "yes" ]; then
 fi
 
 if [ "$userinstall" == "yes" ]; then
-    # Copy arkmanager to ~/bin
+    # Copy asamanager to ~/bin
     mkdir -p "${INSTALL_ROOT}${BINDIR}"
-    cp arkmanager "${INSTALL_ROOT}${BINDIR}/arkmanager"
-    chmod +x "${INSTALL_ROOT}${BINDIR}/arkmanager"
+    cp asamanager "${INSTALL_ROOT}${BINDIR}/asamanager"
+    chmod +x "${INSTALL_ROOT}${BINDIR}/asamanager"
 
-    # Create a folder in ~/.local/share to store arkmanager support files
+    # Create a folder in ~/.local/share to store asamanager support files
     mkdir -p "${INSTALL_ROOT}${DATADIR}"
 
-    # Copy the uninstall script to ~/.local/share/arkmanager
-    cp uninstall-user.sh "${INSTALL_ROOT}${DATADIR}/arkmanager-uninstall.sh"
-    chmod +x "${INSTALL_ROOT}${DATADIR}/arkmanager-uninstall.sh"
+    # Copy the uninstall script to ~/.local/share/asamanager
+    cp uninstall-user.sh "${INSTALL_ROOT}${DATADIR}/asamanager-uninstall.sh"
+    chmod +x "${INSTALL_ROOT}${DATADIR}/asamanager-uninstall.sh"
     sed -i -e "s|^BINDIR=.*|BINDIR=\"${BINDIR}\"|" \
            -e "s|^DATADIR=.*|DATADIR=\"${DATADIR}\"|" \
-           "${INSTALL_ROOT}${DATADIR}/arkmanager-uninstall.sh"
+           "${INSTALL_ROOT}${DATADIR}/asamanager-uninstall.sh"
 
     # Create a folder in ~/logs to let Ark tools write its own log files
     mkdir -p "${INSTALL_ROOT}${PREFIX}/logs/arktools"
@@ -178,8 +178,8 @@ if [ "$userinstall" == "yes" ]; then
     sed -i -e "s|\"/home/steam|\"${PREFIX}|" \
            "${INSTALL_ROOT}${INSTANCEDIR}/instance.cfg.example"
 
-    # Copy arkmanager.cfg to ~/.arkmanager.cfg.NEW
-    cp arkmanager.cfg "${INSTALL_ROOT}${CONFIGFILE}.example"
+    # Copy asamanager.cfg to ~/.asamanager.cfg.NEW
+    cp asamanager.cfg "${INSTALL_ROOT}${CONFIGFILE}.example"
     # Change the defaults in the new config file
     sed -i -e "s|^steamcmd_user=\"steam\"|steamcmd_user=\"--me\"|" \
            -e "s|\"/home/steam|\"${PREFIX}|" \
@@ -189,7 +189,7 @@ if [ "$userinstall" == "yes" ]; then
            -e "s|^install_datadir=.*|install_datadir=\"${DATADIR}\"|" \
            "${INSTALL_ROOT}${CONFIGFILE}.example"
 
-    # Copy arkmanager.cfg to ~/.arkmanager.cfg if it doesn't already exist
+    # Copy asamanager.cfg to ~/.asamanager.cfg if it doesn't already exist
     if [ -f "${INSTALL_ROOT}${CONFIGFILE}" ]; then
       SUFFIX=
       if [ "$migrateconfig" = "no" ]; then
@@ -208,18 +208,18 @@ if [ "$userinstall" == "yes" ]; then
       cp -n "${INSTALL_ROOT}/${INSTANCEDIR}/instance.cfg.example" "${INSTALL_ROOT}/${INSTANCEDIR}/main.cfg"
     fi
 else
-    # Copy arkmanager to /usr/bin and set permissions
-    cp arkmanager "${INSTALL_ROOT}${BINDIR}/arkmanager"
-    chmod +x "${INSTALL_ROOT}${BINDIR}/arkmanager"
+    # Copy asamanager to /usr/bin and set permissions
+    cp asamanager "${INSTALL_ROOT}${BINDIR}/asamanager"
+    chmod +x "${INSTALL_ROOT}${BINDIR}/asamanager"
 
-    # Copy the uninstall script to ~/.local/share/arkmanager
+    # Copy the uninstall script to ~/.local/share/asamanager
     mkdir -p "${INSTALL_ROOT}${LIBEXECDIR}"
-    cp uninstall.sh "${INSTALL_ROOT}${LIBEXECDIR}/arkmanager-uninstall.sh"
-    chmod +x "${INSTALL_ROOT}${LIBEXECDIR}/arkmanager-uninstall.sh"
+    cp uninstall.sh "${INSTALL_ROOT}${LIBEXECDIR}/asamanager-uninstall.sh"
+    chmod +x "${INSTALL_ROOT}${LIBEXECDIR}/asamanager-uninstall.sh"
     sed -i -e "s|^BINDIR=.*|BINDIR=\"${BINDIR}\"|" \
            -e "s|^LIBEXECDIR=.*|LIBEXECDIR=\"${LIBEXECDIR}\"|" \
            -e "s|^DATADIR=.*|DATADIR=\"${DATADIR}\"|" \
-           "${INSTALL_ROOT}${LIBEXECDIR}/arkmanager-uninstall.sh"
+           "${INSTALL_ROOT}${LIBEXECDIR}/asamanager-uninstall.sh"
 
     if [ "$installservice" = "yes" ]; then
       # Copy arkdaemon to /etc/init.d ,set permissions and add it to boot
@@ -227,80 +227,80 @@ else
         # on debian 8, sysvinit and systemd are present. If systemd is available we use it instead of sysvinit
         if [ -f /etc/systemd/system.conf ]; then   # used by systemd
           mkdir -p "${INSTALL_ROOT}${LIBEXECDIR}"
-          cp systemd/arkmanager.init "${INSTALL_ROOT}${LIBEXECDIR}/arkmanager.init"
-          sed -i "s|^DAEMON=\"/usr/bin/|DAEMON=\"${BINDIR}/|" "${INSTALL_ROOT}${LIBEXECDIR}/arkmanager.init"
-          chmod +x "${INSTALL_ROOT}${LIBEXECDIR}/arkmanager.init"
-          cp systemd/arkmanager.service "${INSTALL_ROOT}/etc/systemd/system/arkmanager.service"
-          sed -i "s|=/usr/libexec/arkmanager/|=${LIBEXECDIR}/|" "${INSTALL_ROOT}/etc/systemd/system/arkmanager.service"
-          cp systemd/arkmanager@.service "${INSTALL_ROOT}/etc/systemd/system/arkmanager@.service"
-          sed -i "s|=/usr/bin/|=${BINDIR}/|;s|=steam$|=${steamcmd_user}|" "${INSTALL_ROOT}/etc/systemd/system/arkmanager@.service"
+          cp systemd/asamanager.init "${INSTALL_ROOT}${LIBEXECDIR}/asamanager.init"
+          sed -i "s|^DAEMON=\"/usr/bin/|DAEMON=\"${BINDIR}/|" "${INSTALL_ROOT}${LIBEXECDIR}/asamanager.init"
+          chmod +x "${INSTALL_ROOT}${LIBEXECDIR}/asamanager.init"
+          cp systemd/asamanager.service "${INSTALL_ROOT}/etc/systemd/system/asamanager.service"
+          sed -i "s|=/usr/libexec/asamanager/|=${LIBEXECDIR}/|" "${INSTALL_ROOT}/etc/systemd/system/asamanager.service"
+          cp systemd/asamanager@.service "${INSTALL_ROOT}/etc/systemd/system/asamanager@.service"
+          sed -i "s|=/usr/bin/|=${BINDIR}/|;s|=steam$|=${steamcmd_user}|" "${INSTALL_ROOT}/etc/systemd/system/asamanager@.service"
           if [ -z "${INSTALL_ROOT}" ]; then
             systemctl daemon-reload
-            systemctl enable arkmanager.service
+            systemctl enable asamanager.service
             echo "Ark server will now start on boot, if you want to remove this feature run the following line"
-            echo "systemctl disable arkmanager.service"
+            echo "systemctl disable asamanager.service"
           fi
         else  # systemd not present, so use sysvinit
-          cp lsb/arkdaemon "${INSTALL_ROOT}/etc/init.d/arkmanager"
-          chmod +x "${INSTALL_ROOT}/etc/init.d/arkmanager"
-          sed -i "s|^DAEMON=\"/usr/bin/|DAEMON=\"${BINDIR}/|" "${INSTALL_ROOT}/etc/init.d/arkmanager"
+          cp lsb/arkdaemon "${INSTALL_ROOT}/etc/init.d/asamanager"
+          chmod +x "${INSTALL_ROOT}/etc/init.d/asamanager"
+          sed -i "s|^DAEMON=\"/usr/bin/|DAEMON=\"${BINDIR}/|" "${INSTALL_ROOT}/etc/init.d/asamanager"
           # add to startup if the system use sysinit
           if [ -x /usr/sbin/update-rc.d ] && [ -z "${INSTALL_ROOT}" ]; then
-            update-rc.d arkmanager defaults
+            update-rc.d asamanager defaults
             echo "Ark server will now start on boot, if you want to remove this feature run the following line"
-            echo "update-rc.d -f arkmanager remove"
+            echo "update-rc.d -f asamanager remove"
           fi
         fi
       elif [ -f /etc/rc.d/init.d/functions ]; then
         # on RHEL 7, sysvinit and systemd are present. If systemd is available we use it instead of sysvinit
         if [ -f /etc/systemd/system.conf ]; then   # used by systemd
           mkdir -p "${INSTALL_ROOT}${LIBEXECDIR}"
-          cp systemd/arkmanager.init "${INSTALL_ROOT}${LIBEXECDIR}/arkmanager.init"
-          sed -i "s|^DAEMON=\"/usr/bin/|DAEMON=\"${BINDIR}/|" "${INSTALL_ROOT}${LIBEXECDIR}/arkmanager.init"
-          chmod +x "${INSTALL_ROOT}${LIBEXECDIR}/arkmanager.init"
-          cp systemd/arkmanager.service "${INSTALL_ROOT}/etc/systemd/system/arkmanager.service"
-          sed -i "s|=/usr/libexec/arkmanager/|=${LIBEXECDIR}/|" "${INSTALL_ROOT}/etc/systemd/system/arkmanager.service"
-          cp systemd/arkmanager@.service "${INSTALL_ROOT}/etc/systemd/system/arkmanager@.service"
-          sed -i "s|=/usr/bin/|=${BINDIR}/|;s|=steam$|=${steamcmd_user}|" "${INSTALL_ROOT}/etc/systemd/system/arkmanager@.service"
+          cp systemd/asamanager.init "${INSTALL_ROOT}${LIBEXECDIR}/asamanager.init"
+          sed -i "s|^DAEMON=\"/usr/bin/|DAEMON=\"${BINDIR}/|" "${INSTALL_ROOT}${LIBEXECDIR}/asamanager.init"
+          chmod +x "${INSTALL_ROOT}${LIBEXECDIR}/asamanager.init"
+          cp systemd/asamanager.service "${INSTALL_ROOT}/etc/systemd/system/asamanager.service"
+          sed -i "s|=/usr/libexec/asamanager/|=${LIBEXECDIR}/|" "${INSTALL_ROOT}/etc/systemd/system/asamanager.service"
+          cp systemd/asamanager@.service "${INSTALL_ROOT}/etc/systemd/system/asamanager@.service"
+          sed -i "s|=/usr/bin/|=${BINDIR}/|;s|=steam$|=${steamcmd_user}|" "${INSTALL_ROOT}/etc/systemd/system/asamanager@.service"
           if [ -z "${INSTALL_ROOT}" ]; then
             systemctl daemon-reload
-            systemctl enable arkmanager.service
+            systemctl enable asamanager.service
             echo "Ark server will now start on boot, if you want to remove this feature run the following line"
-            echo "systemctl disable arkmanager.service"
+            echo "systemctl disable asamanager.service"
           fi
         else # systemd not preset, so use sysvinit
-          cp redhat/arkdaemon "${INSTALL_ROOT}/etc/rc.d/init.d/arkmanager"
-          chmod +x "${INSTALL_ROOT}/etc/rc.d/init.d/arkmanager"
-          sed -i "s@^DAEMON=\"/usr/bin/@DAEMON=\"${BINDIR}/@" "${INSTALL_ROOT}/etc/rc.d/init.d/arkmanager"
+          cp redhat/arkdaemon "${INSTALL_ROOT}/etc/rc.d/init.d/asamanager"
+          chmod +x "${INSTALL_ROOT}/etc/rc.d/init.d/asamanager"
+          sed -i "s@^DAEMON=\"/usr/bin/@DAEMON=\"${BINDIR}/@" "${INSTALL_ROOT}/etc/rc.d/init.d/asamanager"
           if [ -x /sbin/chkconfig ] && [ -z "${INSTALL_ROOT}" ]; then
-            chkconfig --add arkmanager
+            chkconfig --add asamanager
             echo "Ark server will now start on boot, if you want to remove this feature run the following line"
-            echo "chkconfig arkmanager off"
+            echo "chkconfig asamanager off"
           fi
         fi
       elif [ -f /sbin/runscript ]; then
-        cp openrc/arkdaemon "${INSTALL_ROOT}/etc/init.d/arkmanager"
-        chmod +x "${INSTALL_ROOT}/etc/init.d/arkmanager"
-        sed -i "s@^DAEMON=\"/usr/bin/@DAEMON=\"${BINDIR}/@" "${INSTALL_ROOT}/etc/init.d/arkmanager"
+        cp openrc/arkdaemon "${INSTALL_ROOT}/etc/init.d/asamanager"
+        chmod +x "${INSTALL_ROOT}/etc/init.d/asamanager"
+        sed -i "s@^DAEMON=\"/usr/bin/@DAEMON=\"${BINDIR}/@" "${INSTALL_ROOT}/etc/init.d/asamanager"
         if [ -x /sbin/rc-update ] && [ -z "${INSTALL_ROOT}" ]; then
-          rc-update add arkmanager default
+          rc-update add asamanager default
           echo "Ark server will now start on boot, if you want to remove this feature run the following line"
-          echo "rc-update del arkmanager default"
+          echo "rc-update del asamanager default"
         fi
       elif [ -f /etc/systemd/system.conf ]; then   # used by systemd
         mkdir -p "${INSTALL_ROOT}${LIBEXECDIR}"
-        cp systemd/arkmanager.init "${INSTALL_ROOT}${LIBEXECDIR}/arkmanager.init"
-        sed -i "s|^DAEMON=\"/usr/bin/|DAEMON=\"${BINDIR}/|" "${INSTALL_ROOT}${LIBEXECDIR}/arkmanager.init"
-        chmod +x "${INSTALL_ROOT}${LIBEXECDIR}/arkmanager.init"
-        cp systemd/arkmanager.service "${INSTALL_ROOT}/etc/systemd/system/arkmanager.service"
-        sed -i "s|=/usr/libexec/arkmanager/|=${LIBEXECDIR}/|" "${INSTALL_ROOT}/etc/systemd/system/arkmanager.service"
-        cp systemd/arkmanager@.service "${INSTALL_ROOT}/etc/systemd/system/arkmanager@.service"
-        sed -i "s|=/usr/bin/|=${BINDIR}/|;s|=steam$|=${steamcmd_user}|" "${INSTALL_ROOT}/etc/systemd/system/arkmanager@.service"
+        cp systemd/asamanager.init "${INSTALL_ROOT}${LIBEXECDIR}/asamanager.init"
+        sed -i "s|^DAEMON=\"/usr/bin/|DAEMON=\"${BINDIR}/|" "${INSTALL_ROOT}${LIBEXECDIR}/asamanager.init"
+        chmod +x "${INSTALL_ROOT}${LIBEXECDIR}/asamanager.init"
+        cp systemd/asamanager.service "${INSTALL_ROOT}/etc/systemd/system/asamanager.service"
+        sed -i "s|=/usr/libexec/asamanager/|=${LIBEXECDIR}/|" "${INSTALL_ROOT}/etc/systemd/system/asamanager.service"
+        cp systemd/asamanager@.service "${INSTALL_ROOT}/etc/systemd/system/asamanager@.service"
+        sed -i "s|=/usr/bin/|=${BINDIR}/|;s|=steam$|=${steamcmd_user}|" "${INSTALL_ROOT}/etc/systemd/system/asamanager@.service"
         if [ -z "${INSTALL_ROOT}" ]; then
           systemctl daemon-reload
-          systemctl enable arkmanager.service
+          systemctl enable asamanager.service
           echo "Ark server will now start on boot, if you want to remove this feature run the following line"
-          echo "systemctl disable arkmanager.service"
+          echo "systemctl disable asamanager.service"
         fi
       fi
     fi
@@ -309,7 +309,7 @@ else
     mkdir -p "${INSTALL_ROOT}/var/log/arktools"
     chown "$steamcmd_user" "${INSTALL_ROOT}/var/log/arktools"
 
-    # Create a folder in /etc/arkmanager to hold instance config files
+    # Create a folder in /etc/asamanager to hold instance config files
     mkdir -p "${INSTALL_ROOT}${INSTANCEDIR}"
     chown "$steamcmd_user" "${INSTALL_ROOT}${INSTANCEDIR}"
 
@@ -320,14 +320,14 @@ else
     sed -i -e "s|\"/home/steam|\"/home/$steamcmd_user|" \
            "${INSTALL_ROOT}${INSTANCEDIR}/instance.cfg.example"
 
-    # Copy arkmanager bash_completion into /etc/bash_completion.d/
+    # Copy asamanager bash_completion into /etc/bash_completion.d/
     mkdir -p "${INSTALL_ROOT}/etc/bash_completion.d"
-    cp bash_completion/arkmanager "${INSTALL_ROOT}/etc/bash_completion.d/arkmanager"
+    cp bash_completion/asamanager "${INSTALL_ROOT}/etc/bash_completion.d/asamanager"
 
-    # Copy arkmanager.cfg inside linux configuation folder if it doesn't already exists
-    mkdir -p "${INSTALL_ROOT}/etc/arkmanager"
-    chown "$steamcmd_user" "${INSTALL_ROOT}/etc/arkmanager"
-    cp arkmanager.cfg "${INSTALL_ROOT}${CONFIGFILE}.example"
+    # Copy asamanager.cfg inside linux configuation folder if it doesn't already exists
+    mkdir -p "${INSTALL_ROOT}/etc/asamanager"
+    chown "$steamcmd_user" "${INSTALL_ROOT}/etc/asamanager"
+    cp asamanager.cfg "${INSTALL_ROOT}${CONFIGFILE}.example"
     chown "$steamcmd_user" "${INSTALL_ROOT}${CONFIGFILE}.example"
     sed -i -e "s|^steamcmd_user=\"steam\"|steamcmd_user=\"$steamcmd_user\"|" \
            -e "s|\"/home/steam|\"/home/$steamcmd_user|" \
@@ -347,7 +347,7 @@ else
       bash ./migrate-main-instance.sh "${INSTALL_ROOT}${CONFIGFILE}${SUFFIX}" "${INSTALL_ROOT}${INSTANCEDIR}/main.cfg${SUFFIX}"
 
       echo "A previous version of ARK Server Tools was detected in your system, your old configuration was not overwritten. You may need to manually update it."
-      echo "A copy of the new configuration file was included in /etc/arkmanager. Make sure to review any changes and update your config accordingly!"
+      echo "A copy of the new configuration file was included in /etc/asamanager. Make sure to review any changes and update your config accordingly!"
       exit 2
     else
       cp -n "${INSTALL_ROOT}${CONFIGFILE}.example" "${INSTALL_ROOT}${CONFIGFILE}"

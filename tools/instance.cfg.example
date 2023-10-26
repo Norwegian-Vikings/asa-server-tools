@@ -26,4 +26,4 @@ ark_MaxPlayers="70"
 #arkopt_StructureDestructionTag=DestroySwampSnowStructures
 
 #arkCustomDynamicConfigURL="http://arkdedicated.com/dynamicconfig.ini"  # Set this to use a custom dynamic config from the given server address
-#arkPreStart="/etc/arkmanager/instances/instance.start"              # Set this to override the start script; defaults to config file name with .cfg replaced by .start
+#arkPreStart="/etc/asamanager/instances/instance.start"              # Set this to override the start script; defaults to config file name with .cfg replaced by .start

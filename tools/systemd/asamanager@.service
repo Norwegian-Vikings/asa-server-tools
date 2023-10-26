@@ -1,0 +1,7 @@
+[Unit]
+Description=Daemon to start an ASA server instance
+
+[Service]
+User=steam
+ExecStart=/usr/bin/asamanager useconfig %i start --no-background
+Type=simple

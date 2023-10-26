@@ -1,0 +1,12 @@
+[Unit]
+Description=Starts and stops all ASA server instances
+After=network.target
+
+[Service]
+ExecStart=/usr/libexec/asamanager/asamanager.init start
+ExecStop=/usr/libexec/asamanager/asamanager.init stop
+Type=forking
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

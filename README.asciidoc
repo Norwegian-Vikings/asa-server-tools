@@ -13,7 +13,7 @@ If updating from 1.6.53 or earlier, and `arkstUnstable` is set, then it is likel
 
 Please either:
 
-* edit `arkmanager` wherever it is installed, and replace
+* edit `asamanager` wherever it is installed, and replace
 +
 `arkstGithubRepo="FezVrasta/ark-server-tools"`
 +
@@ -65,7 +65,7 @@ tar
 ```
 
 If using CentOS 6 or earlier, or Debian 7 or earlier, you will need to compile a newer version of glibc.
-See https://github.com/arkmanager/ark-server-tools/wiki/Install-of-required-versions-of-glibc-and-gcc-on-RHEL-CentOS
+See https://github.com/asamanager/ark-server-tools/wiki/Install-of-required-versions-of-glibc-and-gcc-on-RHEL-CentOS
 
 To use ARK Server Tools, you will need to install **SteamCMD** following this guide:
 
@@ -88,7 +88,7 @@ iptables -I INPUT -p tcp --dport 7778 -j ACCEPT
 iptables -I INPUT -p tcp --dport 32330 -j ACCEPT
 ```
 
-NB: Change the ports according to the ones set in your `arkmanager.cfg` file.
+NB: Change the ports according to the ones set in your `asamanager.cfg` file.
 
 Install ARK Server Tools
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -100,9 +100,9 @@ curl -sL https://raw.githubusercontent.com/StevenB83/ark-server-tools/master/net
 
 NB: You may want to change the `bash -s` parameter to fit your steam user if different from `steam`.
 
-If you want to install the `arkmanager` service, append the `--install-service` option to the install command.
+If you want to install the `asamanager` service, append the `--install-service` option to the install command.
 
-This will copy the `arkmanager` script and its daemon to the proper directories and will create an empty log directory in `/var/log` for ARK Server Tools.
+This will copy the `asamanager` script and its daemon to the proper directories and will create an empty log directory in `/var/log` for ARK Server Tools.
 
 To instead perform a user-install of ARK Server Tools as an unprivileged user, run this command:
 
@@ -112,7 +112,7 @@ curl -sL https://raw.githubusercontent.com/StevenB83/ark-server-tools/master/net
 Configuration
 ~~~~~~~~~~~~~
 
-Stored in `/etc/arkmanager/arkmanager.cfg` and `/etc/arkmanager/instances/<instancename>.cfg` you can find the variables needed to start the server, like the port numbers, the system environment variables and so on.
+Stored in `/etc/asamanager/asamanager.cfg` and `/etc/asamanager/instances/<instancename>.cfg` you can find the variables needed to start the server, like the port numbers, the system environment variables and so on.
 
 You will need to modify these files with any options you wish to give to the server, and any
 paths that are non-standard in your environment (e.g. one common one is the path to the appinfo cache).
@@ -137,7 +137,7 @@ To specify a dash-option without an argument (e.g. `-log`), add the option="" pr
 
 To specify a dash-option with an argument (e.g. `-StructureDestructionTag=DestroySwampSnowStructures`), add the option=value prefixed with `arkopt_` (e.g. `arkopt_StructureDestructionTag=DestroySwampSnowStructures`).
 
-You can override or add variables for a specific system user creating a file called `.arkmanager.cfg` in the home directory of the system user.
+You can override or add variables for a specific system user creating a file called `.asamanager.cfg` in the home directory of the system user.
 
 Each server instance must have its own set of ports.
 These ports are specified using the `ark_Port`, `ark_QueryPort` and `ark_RCONPort` settings in the instance configuration.
@@ -153,12 +153,12 @@ Install ARK Server
 To install ARK Server just run this command as normal user:
 
 [source,sh]
-arkmanager install
+asamanager install
 
 Usage
 -----
 
-`arkmanager [Global Options] <command> [Command Options] [Command Args] [Instances]`
+`asamanager [Global Options] <command> [Command Options] [Command Args] [Instances]`
 
 Global Options
 ~~~~~~~~~~~~~~
@@ -168,7 +168,7 @@ Global Options
     Prints some help on using the command
 
 `--version`::
-    Prints the arkmanager version
+    Prints the asamanager version
 
 Common Options
 ~~~~~~~~~~~~~~
@@ -485,8 +485,8 @@ Configuration files
 Global configuration
 ~~~~~~~~~~~~~~~~~~~~
 
-Global configuration is stored in `/etc/arkmanager/arkmanager.cfg`
-and/or `~/.arkmanager.cfg`.
+Global configuration is stored in `/etc/asamanager/asamanager.cfg`
+and/or `~/.asamanager.cfg`.
 
 The following options cannot be overridden in the instance config
 files:
@@ -510,7 +510,7 @@ files:
 
 `steamcmd_user`::
     The user under which the tools should be run.  Set to `--me`
-    in `~/.arkmanager.cfg` in the case of a user-install
+    in `~/.asamanager.cfg` in the case of a user-install
 
 The following options can be overridden on a per-instance basis:
 
@@ -601,17 +601,17 @@ crash-restart loop if the cause of the crash is not resolved.
 `arkPreStart`::
     Set to the path to a script to execute on startup if it exists
 +
-default: `/path/to/instance/config.start` where `/path/to/instance/config` is the path to the instance config file with the `.cfg` extension removed - e.g. `/etc/arkmanager/instances/main.start`
+default: `/path/to/instance/config.start` where `/path/to/instance/config` is the path to the instance config file with the `.cfg` extension removed - e.g. `/etc/asamanager/instances/main.start`
 
 `arkGameUserSettingsIniFile`::
     Set to the path to an ini file that, if it exists, will overwrite `${arkserverroot}/ShooterGame/Saved/Config/LinuxServer/GameUserSettings.ini` on startup
 +
-default: `/path/to/instance/config.GameUserSettings.ini` where `/path/to/instance/config` is the path to the instance config file with the `.cfg` extension removed - e.g. `/etc/arkmanager/instances/main.GameUserSettings.ini`
+default: `/path/to/instance/config.GameUserSettings.ini` where `/path/to/instance/config` is the path to the instance config file with the `.cfg` extension removed - e.g. `/etc/asamanager/instances/main.GameUserSettings.ini`
 
 `arkGameIniFile`::
     Set to the path to an ini file that, if it exists, will overwrite `${arkserverroot}/ShooterGame/Saved/Config/LinuxServer/Game.ini` on startup
 +
-default: `/path/to/instance/config.Game.ini` where `/path/to/instance/config` is the path to the instance config file with the `.cfg` extension removed - e.g. `/etc/arkmanager/instances/main.Game.ini`
+default: `/path/to/instance/config.Game.ini` where `/path/to/instance/config` is the path to the instance config file with the `.cfg` extension removed - e.g. `/etc/asamanager/instances/main.Game.ini`
 
 `arkStagingDir`::
     Sets the staging directory in order to download updates
@@ -765,8 +765,8 @@ Instance config files
 ~~~~~~~~~~~~~~~~~~~~~
 
 Instance config files are stored under
-`/etc/arkmanager/instances/<instancename>.cfg`,
-`~/.config/arkmanager/instances/<instancename>.cfg`
+`/etc/asamanager/instances/<instancename>.cfg`,
+`~/.config/asamanager/instances/<instancename>.cfg`
 or as specified in the `configfile_<instancename>` options in
 the global config.
 

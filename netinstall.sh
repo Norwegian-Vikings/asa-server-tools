@@ -36,20 +36,20 @@ fi
 
 if [[ "$steamcmd_user" == "--me" && -z "$userinstall2" ]]; then
   echo "You have requested a user-install.  You probably don't want this."
-  echo "A user-install will create ~/.config/arkmanager/instances/main.cfg"
-  echo "This config file will override /etc/arkmanager/instances/main.cfg"
+  echo "A user-install will create ~/.config/asamanager/instances/main.cfg"
+  echo "This config file will override /etc/asamanager/instances/main.cfg"
   echo "Add --perform-user-install if you want this."
   exit 1
 elif [[ "$steamcmd_user" == "--me" && -z "$userinstall" ]]; then
   echo "You have requested a user-install.  You probably don't want this."
-  echo "A user-install will create ~/.config/arkmanager/instances/main.cfg"
-  echo "This config file will override /etc/arkmanager/instances/main.cfg"
+  echo "A user-install will create ~/.config/asamanager/instances/main.cfg"
+  echo "This config file will override /etc/asamanager/instances/main.cfg"
   echo "Add --yes-i-really-want-to-perform-a-user-install if you really want this."
   exit 1
 elif [[ "$steamcmd_user" == "--me" ]]; then
   echo "You have requested a user-install.  You probably don't want this."
-  echo "A user-install will create ~/.config/arkmanager/instances/main.cfg"
-  echo "This config file will override /etc/arkmanager/instances/main.cfg"
+  echo "A user-install will create ~/.config/asamanager/instances/main.cfg"
+  echo "This config file will override /etc/asamanager/instances/main.cfg"
   echo "You have been warned."
 fi
 
@@ -70,7 +70,7 @@ function doInstallFromCommit(){
   if [ ! -f "install.sh" ]; then echo "install.sh not found in $PWD"; exit 1; fi
   sed -i -e "s|^arkstCommit='.*'|arkstCommit='${commit}'|" \
          -e "s|^arkstTag='.*'|arkstTag='${tagname}'|" \
-         arkmanager
+         asamanager
   echo "Running install.sh"
   bash install.sh "$steamcmd_user" "$@"
   result=$?

@@ -4,32 +4,32 @@
 
 BINDIR="/usr/bin"
 # shellcheck disable=SC2034
-DATADIR="/usr/share/arkmanager"
-LIBEXECDIR="/usr/libexec/arkmanager"
+DATADIR="/usr/share/asamanager"
+LIBEXECDIR="/usr/libexec/asamanager"
 INITSCRIPT=
 
-if [ -f "/etc/rc.d/init.d/arkmanager" ]; then
-  INITSCRIPT="/etc/rc.d/init.d/arkmanager"
+if [ -f "/etc/rc.d/init.d/asamanager" ]; then
+  INITSCRIPT="/etc/rc.d/init.d/asamanager"
   if [ -f "/etc/rc.d/init.d/functions" ]; then
-    chkconfig arkmanager off
+    chkconfig asamanager off
   fi
-elif [ -f "/etc/init.d/arkmanager" ]; then
-  INITSCRIPT="/etc/init.d/arkmanager"
+elif [ -f "/etc/init.d/asamanager" ]; then
+  INITSCRIPT="/etc/init.d/asamanager"
   if [ -f "/lib/lsb/init-functions" ]; then
-    update-rc.d -f arkmanager remove
+    update-rc.d -f asamanager remove
   elif [ -f "/sbin/runscript" ]; then
-    rc-update del arkmanager default
+    rc-update del asamanager default
   fi
-elif [ -f "/etc/systemd/system/arkmanager.service" ]; then
-  INITSCRIPT="/etc/systemd/system/arkmanager.service"
-  systemctl disable arkmanager.service
+elif [ -f "/etc/systemd/system/asamanager.service" ]; then
+  INITSCRIPT="/etc/systemd/system/asamanager.service"
+  systemctl disable asamanager.service
 fi
 
 if [ -n "$INITSCRIPT" ]; then
   for f in "${INITSCRIPT}" \
-           "${BINDIR}/arkmanager" \
-           "${LIBEXECDIR}/arkmanager.init" \
-           "${LIBEXECDIR}/arkmanager-uninstall.sh"
+           "${BINDIR}/asamanager" \
+           "${LIBEXECDIR}/asamanager.init" \
+           "${LIBEXECDIR}/asamanager-uninstall.sh"
   do
     if [ -f "$f" ]; then
       rm "$f"
@@ -38,6 +38,6 @@ if [ -n "$INITSCRIPT" ]; then
 fi
 
 # remove bash_completion.d
-if [ -f "/etc/bash_completion.d/arkmanager" ]; then
-   rm "/etc/bash_completion.d/arkmanager"
+if [ -f "/etc/bash_completion.d/asamanager" ]; then
+   rm "/etc/bash_completion.d/asamanager"
 fi
